@@ -25,9 +25,13 @@ function startGame(){
     }
 }
 
+
+
 function turnClick(square){
     if (typeof origBoard[square.target.id] == 'number') {
         turn(square.target.id, huPlayer)
+        let gameWon = checkWin(origBoard, huPlayer)
+        if (gameWon) gameOver(gameWon);
         if (!checkTie()) turn(bestSpot(), aiPlayer);
     }
 }
@@ -36,9 +40,6 @@ function turn(squareId, player){
     origBoard[squareId] = player;
     document.getElementById(squareId).innerText = player;
 
-    // check is the game is won
-    let gameWon = checkWin(origBoard, player)
-    if (gameWon) gameOver(gameWon);
 }
 
 
@@ -48,6 +49,7 @@ function checkWin(board, player) {
 	let gameWon = null;
 	for (let [index, win] of winCombos.entries()) {
 		if (win.every(elem => plays.indexOf(elem) > -1)) {
+            console.log(plays);
 			gameWon = {index: index, player: player};
 			break;
 		}
