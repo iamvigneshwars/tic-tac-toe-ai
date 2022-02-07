@@ -8,6 +8,8 @@
   }
   
   .board {
+    /* width: 100vw; */
+    /* height: 100vh; */
     display: grid;
     justify-content: center;
     align-content: center;
@@ -106,5 +108,5 @@
   .board.o .cell:not(.x):not(.circle):hover::after {
     width: calc(var(--mark-size) * .7);
     height: calc(var(--mark-size) * .7);
-    background-color: rgb(43, 43, 43);
+    background-color: rgb(255, 255, 255);
   }

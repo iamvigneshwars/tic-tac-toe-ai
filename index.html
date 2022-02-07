@@ -13,9 +13,15 @@
 </head>
 
 <body>
-
+    <header class="p-3 bg-dark text-white">
+        <div class="container">
+            <div class="d-flex flex-wrap align-items-center justify-content-center ">
+                <h5>Tic | Tac | Toe - AI</h5>
+            </div>
+        </div>
+    </header>
     <br><br>
-    <div class="container text-white bg-dark">
+    <!-- <div class="container text-white bg-dark"> -->
         <br>
         <p id='result_message' class="text-center">Can you beat the AI?</p>
         <br>
@@ -30,12 +36,26 @@
             <div id="7" class="cell" data-cell></div>
             <div id="8" class="cell" data-cell></div>
         </div>
-        <div class="winning-message" id="winningMessage">
-            <div data-winning-message-text></div>
-            <button id="restartButton" onclick="startGame()">Restart </button>
+        <br>
+        <br>
+        <div class="col-md-12 text-center">
+            <button type = 'button' class ='btn btn-warning' id="restartButton" onclick="startGame()">Play Again</button>
         </div>
+    <!-- </div> -->
+    <div class="container">
+        <footer class="py-3 my-4">
+            <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+                <li class="nav-item"><a href="https://github.com/iamvigneshwars" target="_blank"
+                        class="nav-link px-2 text-muted">Github</a></li>
+                <li class="nav-item"><a href="https://www.linkedin.com/in/vigneshwar-shanmugasundar-2b3553211/"
+                        target="_blank" class="nav-link px-2 text-muted">LinkedIn</a></li>
+                <li class="nav-item"><a href="mailto:iamvigneshwars@gmail.com"
+                        class="nav-link px-2 text-muted">Gmail</a></li>
+            </ul>
+            <p class="text-center text-muted">&copy;2022 Vigneshwar Shanmugasundar</p>
+        </footer>
     </div>
-
+    
     <script src="static/js/script.js"></script>
     <!-- JavaScript Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
