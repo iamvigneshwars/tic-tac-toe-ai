@@ -26,6 +26,8 @@ function startGame(){
         cells[i].innerText = '';
         cells[i].style.removeProperty('background-color');
         cells[i].addEventListener('click', turnClick);
+        cells[i].classList.remove('x');
+        cells[i].classList.remove('o');
     }
 }
 
@@ -43,7 +45,8 @@ function turnClick(square){
 
 function turn(squareId, player){
     Board[squareId] = player;
-    document.getElementById(squareId).innerText = player;
+    // document.getElementById(squareId).innerText = player;
+    document.getElementById(squareId).classList.add(player)
 
 }
 
@@ -80,7 +83,7 @@ function checkTie(){
 function gameOver(gameWon){
     for (let index of winCombos[gameWon.index]) {
         document.getElementById(index).style.backgroundColor = 
-        gameWon.player == huPlayer ? "blue" : "red";
+        gameWon.player == huPlayer ? "green" : "red";
     }
     for (var i = 0; i < cells.length; i++){
         cells[i].removeEventListener('click', turnClick, false)
@@ -109,7 +112,6 @@ function minimax(state, player){
     } else if (availSpots.length === 0) {
         return {score : 0};
     }
-    
     var moves = [];
     for (var i= 0; i < availSpots.length; i++){
         var move = {};

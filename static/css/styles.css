@@ -1,5 +1,13 @@
+
+/* body {
+  background-color: rgb(80, 80, 80);
+}
+ */
+
+
+
 td {
-  border : 2px solid #333;
+  border : 2px solid rgb(0, 0, 0);
   height: 100px;
   width: 100px;
   text-align: center;
@@ -56,3 +64,10 @@ table tr td:last-child {
 .o::after {
   content: '⭕';
 }
+/* .x::after{
+  color: #09C372;
+}
+
+.o::after {
+  color: #498AFB;
+} */
