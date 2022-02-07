@@ -25,7 +25,7 @@ function startGame(){
     for (var i = 0; i < cells.length; i++) {
         cells[i].innerText = '';
         cells[i].style.removeProperty('background-color');
-        cells[i].addEventListener('click', turnClick, false);
+        cells[i].addEventListener('click', turnClick);
     }
 }
 
@@ -35,8 +35,7 @@ function turnClick(square){
         turn(square.target.id, huPlayer);
         let gameWon = checkWin(Board, huPlayer)
         if (gameWon) gameOver(gameWon);
-        if (!checkTie()) turn(bestSpot(), aiPlayer);
-        // console.log(Board[square.target.id]);
+        if (!gameWon && !checkTie()) turn(bestSpot(), aiPlayer);
     }
 }
 
@@ -60,7 +59,6 @@ function checkWin(board, player) {
 	let gameWon = null;
 	for (let [index, win] of winCombos.entries()) {
 		if (win.every(elem => plays.indexOf(elem) > -1)) {
-            console.log(plays);
 			gameWon = {index: index, player: player};
 			break;
 		}
