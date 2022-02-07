@@ -48,3 +48,11 @@ table tr td:last-child {
   font-size: 2em;
 
 }
+
+.x::after {
+  content: '❌';
+}
+
+.o::after {
+  content: '⭕';
+}

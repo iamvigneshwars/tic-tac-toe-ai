@@ -36,6 +36,8 @@ function turnClick(square){
         let gameWon = checkWin(Board, huPlayer)
         if (gameWon) gameOver(gameWon);
         if (!gameWon && !checkTie()) turn(bestSpot(), aiPlayer);
+        gameWon = checkWin(Board, aiPlayer)
+        if (gameWon) gameOver(gameWon);
     }
 }
 
@@ -49,9 +51,6 @@ function emptySquares() {
     return Board.filter(s => typeof s == 'number');
 }
 
-function bestSpot() {
-    return emptySquares()[0];
-}
 
 function checkWin(board, player) {
 	let plays = board.reduce((a, e, i) => 
@@ -95,3 +94,56 @@ function declareWinner(who) {
 
 }
 
+
+function bestSpot() {
+    return minimax(Board, aiPlayer).index;
+}
+
+function minimax(state, player){
+    var availSpots = emptySquares(state);
+
+    if (checkWin(state, player)){
+        return {score: -10};
+    } else if (checkWin(state, aiPlayer)){
+        return {score: 10};
+    } else if (availSpots.length === 0) {
+        return {score : 0};
+    }
+    
+    var moves = [];
+    for (var i= 0; i < availSpots.length; i++){
+        var move = {};
+        move.index = state[availSpots[i]];
+        state[availSpots[i]] = player;
+
+        if (player == aiPlayer) {
+            var result = minimax(state, huPlayer);
+            move.score = result.score;
+        } else {
+            var result = minimax(state, aiPlayer);
+            move.score = result.score;
+        }
+        state[availSpots[i]] = move.index;
+        moves.push(move);
+    }
+    
+    var bestMove;
+    if (player === aiPlayer){
+        var bestScore = -10000;
+        for (var i = 0; i < moves.length; i++){
+            if (moves[i].score > bestScore){
+                bestScore = moves[i].score;
+                bestMove = i;
+            }
+        }
+    }else {
+        var bestScore= 10000;
+        for (var i =0; i < moves.length; i++){
+            if (moves[i].score < bestScore){
+                bestScore= moves[i].score;
+                bestMove =i;
+            }
+        }
+    }
+    return moves[bestMove];
+}
