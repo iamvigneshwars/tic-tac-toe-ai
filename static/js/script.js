@@ -43,8 +43,61 @@ function turn(cellId, player){
 }
 
 function AiMove(){
+
+    // return minimax(Board, AiPlayer).index;
+    let best = minimax(Board, AiPlayer);
+    console.log(best);
+    // return minimax(Board, AiPlayer);
     return emptyCells()[0];
 }
+
+function minimax(gameState, player){
+
+    var available_cell = emptyCells();
+
+	if (checkWinner(gameState, humanPlayer)) {
+		return {score: -10};
+	} else if (checkWinner(gameState, AiPlayer)) {
+		return {score: 10};
+	} else if (available_cell.length === 0) {
+		return {score: 0};
+	}
+	
+    var bestMove;
+    if (player === AiPlayer){
+        var bestScore = -Infinity;
+        for (var i = 0 ; i < available_cell.length; i++){
+            let index = available_cell[i];
+            gameState[index] = player;
+            let score = minimax(gameState, humanPlayer);
+            gameState[index] = index;
+            if (score > bestScore){
+                bestScore = score;
+                bestMove = index;
+            }
+    return bestMove;
+            
+        }
+    } else {
+        var bestScore = Infinity;
+        for (var i = 0 ; i < available_cell.length; i++){
+            let index = available_cell[i];
+            gameState[index] = player;
+            let score = minimax(gameState, AiPlayer);
+            gameState[index] = index; 
+            if (score < bestScore){
+                bestScore = score;
+                bestMove = index;
+            }
+            
+        }
+        return bestMove;
+    }
+
+
+}
+
+
 
 function emptyCells() {
     return Board.filter(s => typeof s == 'number');
