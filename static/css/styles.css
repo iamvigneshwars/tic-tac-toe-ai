@@ -4,7 +4,7 @@
   
   :root {
     --cell-size: 100px;
-    --mark-size: calc(var(--cell-size) * .9);
+    --mark-size: calc(var(--cell-size) * .6);
   }
   
   body {
@@ -59,11 +59,14 @@
   }
   
   .cell.x::before,
-  .cell.x::after,
-  .cell.o::before {
-    background-color: black;
+  .cell.x::after{
+    background-color: rgb(0, 17, 255);
   }
   
+  .cell.o::before {
+    background-color: rgb(255, 0, 0);
+  }
+
   .board.x .cell:not(.x):not(.o):hover::before,
   .board.x .cell:not(.x):not(.o):hover::after,
   .board.o .cell:not(.x):not(.circle):hover::before {
