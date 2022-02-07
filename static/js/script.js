@@ -44,56 +44,56 @@ function turn(cellId, player){
 
 function AiMove(){
 
-    // return minimax(Board, AiPlayer).index;
-    let best = minimax(Board, AiPlayer);
-    console.log(best);
-    // return minimax(Board, AiPlayer);
-    return emptyCells()[0];
+    var available_cells = emptyCells();
+    let bestScore = -Infinity;
+    let move;
+    for (let i = 0; i < available_cells.length; i++){
+        Board[available_cells[i]] = AiPlayer;
+        let score= minimax(Board, false);
+        Board[available_cells[i]] = available_cells[i];
+        if (score > bestScore) {
+            bestScore = score;
+            move = available_cells[i];
+        }
+    }
+
+    return move;
+   
 }
 
-function minimax(gameState, player){
+function minimax(gameState, isMax){
 
     var available_cell = emptyCells();
 
 	if (checkWinner(gameState, humanPlayer)) {
-		return {score: -10};
+		return -10;
 	} else if (checkWinner(gameState, AiPlayer)) {
-		return {score: 10};
+		return 10;
 	} else if (available_cell.length === 0) {
-		return {score: 0};
+		return  0;
 	}
-	
-    var bestMove;
-    if (player === AiPlayer){
-        var bestScore = -Infinity;
-        for (var i = 0 ; i < available_cell.length; i++){
-            let index = available_cell[i];
-            gameState[index] = player;
-            let score = minimax(gameState, humanPlayer);
-            gameState[index] = index;
-            if (score > bestScore){
-                bestScore = score;
-                bestMove = index;
-            }
-    return bestMove;
-            
-        }
-    } else {
-        var bestScore = Infinity;
-        for (var i = 0 ; i < available_cell.length; i++){
-            let index = available_cell[i];
-            gameState[index] = player;
-            let score = minimax(gameState, AiPlayer);
-            gameState[index] = index; 
-            if (score < bestScore){
-                bestScore = score;
-                bestMove = index;
-            }
-            
-        }
-        return bestMove;
-    }
 
+    if (isMax){
+        let bestScore = -10000;
+        for (let i = 0; i < available_cell.length;i++){
+            gameState[available_cell[i]] = AiPlayer;
+            let score = minimax(gameState, false);
+            gameState[available_cell[i]] = available_cell[i];
+            bestScore = Math.max(score, bestScore);
+        }
+        return bestScore;
+    } else {
+        let bestScore = 10000;
+        for (let i = 0; i < available_cell.length;i++){
+            gameState[available_cell[i]] = humanPlayer;
+            let score = minimax(gameState, true);
+            gameState[available_cell[i]] = available_cell[i];
+            bestScore = Math.min(score, bestScore);
+        }
+        return bestScore;
+
+    }
+	
 
 }
 
