@@ -110,3 +110,20 @@
     height: calc(var(--mark-size) * .7);
     background-color: rgb(255, 255, 255);
   }
+
+
+  .message {
+    /* display: none; */
+    width: 200px;
+    top: 280px;
+    background-color: rgba(219, 210, 77, 0.945);
+    position: absolute;
+    left: 50%;
+    margin-left: -100px;
+    padding-top: 70px;
+    padding-bottom: 70px;
+    text-align: center;
+    border-radius: 5px;
+    color: rgb(255, 255, 255);
+    font-size: 2em;
+  }
