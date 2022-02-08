@@ -8,3 +8,8 @@ This project is built using vanilla JavaScript. The AI uses a minimax algorithm 
 </p>
 
 [Play the Game](https://iamvigneshwars.github.io/tic-tac-toe-ai/)
+
+## Future Improvements
+
+- Limit the depth of MiniMax Search.
+- Add Aplha Beta pruning to prune unwanted branches.
